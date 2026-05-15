@@ -4,11 +4,11 @@ Update this file after every meaningful implementation change.
 
 ## Current Phase
 
-- Specs complete, build not yet started. Entering **Week 1 — Foundations**.
+- **Week 1 — Foundations.** U1 (Design System) and U2 (Foundations) complete.
 
 ## Current Goal
 
-- Finalize spec files and kick off **U1 — Foundations**: Next.js scaffold, Supabase project, Tailwind + shadcn, Vercel deploy of a "hello world" page.
+- **U3 — Auth.** Google SSO via Supabase; `@pelago.co` domain enforced server-side at the OAuth callback; admin role from seeded allowlist; learner gets 403 on `/admin`.
 
 ## Completed
 
@@ -17,7 +17,8 @@ Update this file after every meaningful implementation change.
 - `code-standards.md` — General, TypeScript, Next.js, Styling, API Routes, Data, File Organization.
 - `ai-workflow-rules.md` — incremental spec-driven workflow, scoping, sync rules, exit criteria per unit.
 - `ui-context.md` — colors, typography, radius, spacing, layout patterns, icons.
-- **01 — Design System.** shadcn/ui (base-nova style, @base-ui/react) initialized; 19 components in `components/ui/`; `lucide-react` installed; `lib/utils.ts` `cn()` helper; globals.css with full design token `:root` block mapped to shadcn semantics; layout.tsx with Inter + JetBrains Mono via `next/font`; `TooltipProvider` at root; typecheck + build green.
+- **01 — Design System.** shadcn/ui (base-nova style, @base-ui/react) initialized; 19 components in `components/ui/`; `lucide-react` installed; `lib/utils.ts` `cn()` helper; globals.css with full design token `:root` block mapped to shadcn semantics; layout.tsx with Inter + JetBrains Mono via `next/font`; `TooltipProvider` at root; `typecheck` script added (`tsc --noEmit`); `page.tsx` renders `<Button>` + `<Card>` using only tokens; `npm run typecheck` + `npm run build` green. **DoD met.**
+- **02 — Foundations.** `page.tsx` renders "Hello — AI Training Platform"; `next.config.ts` has `reactStrictMode: true` + `typedRoutes: true` (stable, not experimental in Next.js 16); Prettier + `prettier-plugin-tailwindcss` installed; `.prettierrc` + `.prettierignore` committed; `format` script added; Husky pre-commit hook running `lint-staged` (Prettier + ESLint on staged files); `.github/workflows/ci.yml` (Node 20, `npm ci` → typecheck → lint → build on PRs); `.env.local.example` committed with Supabase URL/anon/service-role placeholders; `.gitignore` updated to allow `.env.local.example`; `docs/decisions.md` seeded with ADR-001 (stack) and ADR-002 (design tokens); placeholder folders created for `lib/db`, `lib/auth`, `lib/schemas`, `lib/domain`, `lib/supabase`, `db/migrations`, `components/learner`, `components/admin`, `components/shared`, `app/(learner)`, `app/(admin)`; `npm run typecheck` + `npm run lint` + `npm run build` all green. **Note:** `eslint-plugin-tailwindcss` removed from ESLint — its worker thread cannot resolve the Tailwind v4 CSS-only package; class ordering is covered by `prettier-plugin-tailwindcss` at format time. **DoD met (pending Vercel deploy + CI branch protection).**
 
 ## In Progress
 
@@ -25,9 +26,8 @@ Update this file after every meaningful implementation change.
 
 ## Next Up
 
-- **U1 — Foundations.** Acceptance: prod URL renders "hello world"; Vercel previews per PR; lint + typecheck + build all green; `.env.local` template committed.
-- **U2 — Auth.** Google SSO via Supabase; `@pelago.co` domain enforced server-side at the OAuth callback; admin role assigned from seeded email allowlist; learner gets 403 on `/admin`.
-- **U3 — Data layer.** Six tables (`users`, `modules`, `materials`, `material_clicks`, `groups`, `group_members`) with RLS policies and a seed script for 8 weeks × ~3 modules with materials.
+- **U3 — Auth.** Google SSO via Supabase; `@pelago.co` domain enforced server-side at the OAuth callback; admin role assigned from seeded email allowlist; learner gets 403 on `/admin`.
+- **U4 — Data layer.** Six tables (`users`, `modules`, `materials`, `material_clicks`, `groups`, `group_members`) with RLS policies and a seed script for 8 weeks × ~3 modules with materials.
 
 ## Open Questions
 
