@@ -10,7 +10,7 @@ import { GroupEditForm } from "@/components/learner/GroupEditForm";
 export default async function GroupEditPage() {
   const user = await requireLearner();
 
-  if (!isGroupFormationOpen()) redirect("/group");
+  if (!(await isGroupFormationOpen())) redirect("/group");
 
   const groupWithMembers = await getGroupForUser(user.id);
   if (!groupWithMembers) redirect("/group");

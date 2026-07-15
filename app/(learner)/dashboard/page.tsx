@@ -27,6 +27,7 @@ export default async function DashboardPage() {
     submissions,
     quizzes,
     passingQuizIds,
+    formationOpen,
   ] = await Promise.all([
     getModules(),
     getAllMaterials(),
@@ -37,6 +38,7 @@ export default async function DashboardPage() {
     getSubmissionsByUser(user.id),
     getAllQuizzes(),
     getPassingQuizIdsByUser(user.id),
+    isGroupFormationOpen(),
   ]);
 
   const participationMode = groupWithMembers ? ("group" as const) : participationModeField;
@@ -99,7 +101,7 @@ export default async function DashboardPage() {
         <GroupCard
           groupWithMembers={groupWithMembers}
           participationMode={participationMode}
-          isFormationOpen={isGroupFormationOpen()}
+          isFormationOpen={formationOpen}
         />
       </div>
     </div>

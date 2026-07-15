@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
 
 export default async function GroupPage() {
   const user = await requireLearner();
-  const formationOpen = isGroupFormationOpen();
+  const formationOpen = await isGroupFormationOpen();
 
   const [groupWithMembers, participationModeField, openGroups] = await Promise.all([
     getGroupForUser(user.id),

@@ -22,8 +22,8 @@ import {
 
 export type ActionResult = { ok: true } | { ok: false; error: string };
 
-function cutoffGuard(): ActionResult | null {
-  if (!isGroupFormationOpen()) {
+async function cutoffGuard(): Promise<ActionResult | null> {
+  if (!(await isGroupFormationOpen())) {
     return { ok: false, error: "Group formation is closed" };
   }
   return null;
@@ -31,7 +31,7 @@ function cutoffGuard(): ActionResult | null {
 
 // Explicitly opt in as an individual participant.
 export async function chooseIndividual(): Promise<ActionResult> {
-  const guard = cutoffGuard();
+  const guard = await cutoffGuard();
   if (guard) return guard;
 
   try {
@@ -50,7 +50,7 @@ export async function chooseIndividual(): Promise<ActionResult> {
 
 // Leave the current group and switch to solo.
 export async function switchToSolo(groupId: string): Promise<ActionResult> {
-  const guard = cutoffGuard();
+  const guard = await cutoffGuard();
   if (guard) return guard;
 
   try {
@@ -69,7 +69,7 @@ export async function switchToSolo(groupId: string): Promise<ActionResult> {
 }
 
 export async function createGroup(data: CreateGroupFormInput): Promise<ActionResult> {
-  const guard = cutoffGuard();
+  const guard = await cutoffGuard();
   if (guard) return guard;
 
   try {
@@ -94,7 +94,7 @@ export async function createGroup(data: CreateGroupFormInput): Promise<ActionRes
 }
 
 export async function joinGroup(groupId: string): Promise<ActionResult> {
-  const guard = cutoffGuard();
+  const guard = await cutoffGuard();
   if (guard) return guard;
 
   try {
@@ -114,7 +114,7 @@ export async function joinGroup(groupId: string): Promise<ActionResult> {
 }
 
 export async function editGroup(groupId: string, data: EditGroupFormInput): Promise<ActionResult> {
-  const guard = cutoffGuard();
+  const guard = await cutoffGuard();
   if (guard) return guard;
 
   try {
@@ -140,7 +140,7 @@ export async function editGroup(groupId: string, data: EditGroupFormInput): Prom
 }
 
 export async function setPic(groupId: string, newPicUserId: string): Promise<ActionResult> {
-  const guard = cutoffGuard();
+  const guard = await cutoffGuard();
   if (guard) return guard;
 
   try {
@@ -157,7 +157,7 @@ export async function setPic(groupId: string, newPicUserId: string): Promise<Act
 }
 
 export async function leaveGroup(groupId: string): Promise<ActionResult> {
-  const guard = cutoffGuard();
+  const guard = await cutoffGuard();
   if (guard) return guard;
 
   try {
@@ -176,7 +176,7 @@ export async function leaveGroup(groupId: string): Promise<ActionResult> {
 
 // PIC-only: add a learner to the group.
 export async function addGroupMemberAction(groupId: string, userId: string): Promise<ActionResult> {
-  const guard = cutoffGuard();
+  const guard = await cutoffGuard();
   if (guard) return guard;
 
   try {
@@ -197,7 +197,7 @@ export async function removeGroupMemberAction(
   groupId: string,
   userId: string
 ): Promise<ActionResult> {
-  const guard = cutoffGuard();
+  const guard = await cutoffGuard();
   if (guard) return guard;
 
   try {

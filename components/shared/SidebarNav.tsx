@@ -11,6 +11,7 @@ import {
   UsersRound,
   ClipboardList,
   UserCog,
+  Settings,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -55,6 +56,7 @@ export function SidebarNav({ isAdmin }: { isAdmin: boolean }) {
               { href: "/admin/modules", label: "Curriculum", icon: ShieldCheck, exact: false },
               { href: "/admin/groups", label: "Groups", icon: UsersRound, exact: false },
               { href: "/admin/exercises", label: "Exercises", icon: ClipboardList, exact: false },
+              { href: "/admin/settings", label: "Settings", icon: Settings, exact: false },
             ] as const
           ).map(({ href, label, icon: Icon, exact }) => (
             <Link
